@@ -2,11 +2,9 @@
 import { Heart } from "lucide-react";
 import { motion } from "framer-motion";
 import { useWishlist } from "@/store/useWishlist";
-import { Card } from "./Card";
 
 export function Header() {
   const { items, toggleWishlistPanel } = useWishlist();
-  console.log(Card, "🐲");
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white">

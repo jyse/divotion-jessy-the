@@ -16,6 +16,8 @@ interface WishlistState {
   toggleWishlistPanel: () => void;
   toggleItem: (product: Omit<WishlistItem, "quantity">) => void;
   updateQuantity: (id: string, quantity: number) => void;
+  removeItem: (id: string) => void;
+  clearWishlist: () => void;
 }
 
 export const useWishlist = create<WishlistState>()(
@@ -36,7 +38,17 @@ export const useWishlist = create<WishlistState>()(
             };
           }
           return {
-            items: [...state.items, { ...product, quantity: 1 }]
+            items: [
+              ...state.items,
+              {
+                id: product.id,
+                title: product.title,
+                image: product.image,
+                price: product.price,
+                dimensions: product.dimensions,
+                quantity: 1 // ✅ Make sure quantity starts at 1
+              }
+            ]
           };
         }),
       updateQuantity: (id, quantity) =>
@@ -44,6 +56,14 @@ export const useWishlist = create<WishlistState>()(
           items: state.items.map((item) =>
             item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item
           )
+        })),
+      removeItem: (id) =>
+        set((state) => ({
+          items: state.items.filter((item) => item.id !== id)
+        })),
+      clearWishlist: () =>
+        set(() => ({
+          items: []
         }))
     }),
     {

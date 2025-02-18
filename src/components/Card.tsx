@@ -42,10 +42,10 @@ export function Card(props: CardProps) {
         <div className="mt-3 space-y-1 px-2 pb-2">
           <h3 className="text-sm font-medium text-gray-900">{props.title}</h3>
           <div className="flex items-center justify-between">
-            <p className="text-lg font-medium text-gray-900">
-              €{props.price.toFixed(2)}
-            </p>
-            <p className="text-sm text-gray-500">{props.dimensions}</p>
+            {/* <p className="text-lg font-medium text-gray-900"> */}
+            {/* €{props.price.toFixed(2)} */}
+            {/* </p> */}
+            {/* <p className="text-sm text-gray-500">{props.dimensions}</p> */}
           </div>
         </div>
       </div>
