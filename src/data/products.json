@@ -1,0 +1,60 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "title": "Abstract AI Art Piece #1",
+      "image": "/images/1.png",
+      "price": 49.99,
+      "dimensions": "24x36 inches"
+    },
+    {
+      "id": "2",
+      "title": "Abstract AI Art Piece #2",
+      "image": "/images/2.png",
+      "price": 59.99,
+      "dimensions": "24x36 inches"
+    },
+    {
+      "id": "3",
+      "title": "Abstract AI Art Piece #3",
+      "image": "/images/2.png",
+      "price": 59.99,
+      "dimensions": "24x36 inches"
+    },
+    {
+      "id": "4",
+      "title": "Abstract AI Art Piece #4",
+      "image": "/images/2.png",
+      "price": 59.99,
+      "dimensions": "24x36 inches"
+    },
+    {
+      "id": "5",
+      "title": "Abstract AI Art Piece #5",
+      "image": "/images/2.png",
+      "price": 59.99,
+      "dimensions": "24x36 inches"
+    },
+    {
+      "id": "6",
+      "title": "Abstract AI Art Piece #6",
+      "image": "/images/2.png",
+      "price": 59.99,
+      "dimensions": "24x36 inches"
+    },
+    {
+      "id": "7",
+      "title": "Abstract AI Art Piece #7",
+      "image": "/images/2.png",
+      "price": 59.99,
+      "dimensions": "24x36 inches"
+    },
+    {
+      "id": "8",
+      "title": "Abstract AI Art Piece #8",
+      "image": "/images/2.png",
+      "price": 59.99,
+      "dimensions": "24x36 inches"
+    }
+  ]
+}
