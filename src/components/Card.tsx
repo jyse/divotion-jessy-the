@@ -3,6 +3,7 @@
 import { Heart } from "lucide-react";
 import Image from "next/image";
 import { useWishlist } from "@/store/useWishlist";
+import { toast } from "react-hot-toast";
 
 interface CardProps {
   id: string;
@@ -15,6 +16,34 @@ interface CardProps {
 export function Card(props: CardProps) {
   const { items, toggleItem } = useWishlist();
   const isInWishlist = items.some((item) => item.id === props.id);
+
+  const handleWishlistToggle = () => {
+    toggleItem(props);
+
+    const toastStyle = {
+      background: "#222", // ✅ Dark background
+      color: "#fff", // ✅ White text
+      fontWeight: "bold", // ✅ Bold font
+      borderRadius: "8px", // ✅ Smooth edges
+      padding: "12px 16px", // ✅ Better spacing
+      whiteSpace: "nowrap", // ✅ Prevents wrapping
+      maxWidth: "none" // ✅ Allows full-length text
+    };
+
+    if (isInWishlist) {
+      toast.error(`Removed "${props.title}" from wishlist`, {
+        duration: 2500,
+        position: "bottom-center",
+        style: toastStyle
+      });
+    } else {
+      toast.success(`Added "${props.title}" to wishlist`, {
+        duration: 2500,
+        position: "bottom-center",
+        style: toastStyle
+      });
+    }
+  };
 
   return (
     <div className="group relative">
@@ -29,7 +58,7 @@ export function Card(props: CardProps) {
             className="object-cover object-center"
           />
           <button
-            onClick={() => toggleItem(props)}
+            onClick={handleWishlistToggle}
             className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md transition-transform hover:scale-110"
           >
             <Heart
@@ -42,10 +71,10 @@ export function Card(props: CardProps) {
         <div className="mt-3 space-y-1 px-2 pb-2">
           <h3 className="text-sm font-medium text-gray-900">{props.title}</h3>
           <div className="flex items-center justify-between">
-            {/* <p className="text-lg font-medium text-gray-900"> */}
-            {/* €{props.price.toFixed(2)} */}
-            {/* </p> */}
-            {/* <p className="text-sm text-gray-500">{props.dimensions}</p> */}
+            {/* <p className="text-lg font-medium text-gray-900">
+              €{props.price.toFixed(2)}
+            </p>
+            <p className="text-sm text-gray-500">{props.dimensions}</p> */}
           </div>
         </div>
       </div>
