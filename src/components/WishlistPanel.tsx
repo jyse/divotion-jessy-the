@@ -44,8 +44,14 @@ export function WishlistPanel() {
                 Clear All
               </button>
               <h2 className="text-lg font-medium">
-                Wishlist {items.length > 0 && `(${items.length})`}
+                Wishlist{" "}
+                {items.length > 0 &&
+                  `(${items.reduce(
+                    (total, item) => total + item.quantity,
+                    0
+                  )})`}
               </h2>
+
               <button
                 onClick={toggleWishlistPanel}
                 className="rounded-full p-2 hover:bg-gray-100"
@@ -56,69 +62,77 @@ export function WishlistPanel() {
 
             {/* Items */}
             <div className="h-full overflow-y-auto p-4">
-              {items.length === 0 ? (
-                <p className="text-center text-gray-500">
-                  Your wishlist is empty
-                </p>
-              ) : (
-                <div className="space-y-4">
-                  <AnimatePresence>
-                    {items.map((item) => (
-                      <motion.div
-                        key={item.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, x: 100 }} // ✅ Smooth removal animation
-                        transition={{ duration: 0.3 }}
-                        className="flex gap-4 border-b pb-4 last:border-none" // ✅ Last item has no border
-                      >
-                        <div className="relative h-24 w-24 flex-shrink-0">
-                          <Image
-                            src={item.image}
-                            alt={item.title}
-                            fill
-                            className="rounded-lg object-cover"
-                          />
-                        </div>
-                        <div className="flex flex-1 flex-col">
-                          <h3 className="font-medium">{item.title}</h3>
-                          <p className="text-sm text-gray-500">
-                            {item.dimensions}
-                          </p>
-                          <div className="mt-2 flex items-center gap-2">
-                            <button
-                              onClick={() =>
-                                updateQuantity(item.id, item.quantity - 1)
-                              }
-                              className="rounded-full bg-gray-100 px-3 py-1 hover:bg-gray-200"
-                            >
-                              -
-                            </button>
-                            <span>{item.quantity}</span>
-                            <button
-                              onClick={() =>
-                                updateQuantity(item.id, item.quantity + 1)
-                              }
-                              className="rounded-full bg-gray-100 px-3 py-1 hover:bg-gray-200"
-                            >
-                              +
-                            </button>
-                          </div>
-                        </div>
-                        {/* ✅ Trash icon with extra padding */}
-                        <button
-                          onClick={() => removeItem(item.id)}
-                          className="text-gray-500 hover:text-red-500 transition pr-4" // ✅ Added extra right padding
+              <AnimatePresence mode="wait">
+                {items.length === 0 ? (
+                  <motion.p
+                    key="empty-message"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-center text-gray-500"
+                  >
+                    Your wishlist is empty
+                  </motion.p>
+                ) : (
+                  <div className="space-y-4">
+                    <AnimatePresence>
+                      {items.map((item) => (
+                        <motion.div
+                          key={item.id}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, x: 100 }} // ✅ Smooth removal animation
+                          transition={{ duration: 0.3 }}
+                          className="flex gap-4 border-b pb-4 last:border-none" // ✅ Last item has no border
                         >
-                          <Trash className="h-5 w-5" />
-                        </button>
-                      </motion.div>
-                    ))}
-                  </AnimatePresence>
-                </div>
-              )}
+                          <div className="relative h-24 w-24 flex-shrink-0">
+                            <Image
+                              src={item.image}
+                              alt={item.title}
+                              fill
+                              className="rounded-lg object-cover"
+                            />
+                          </div>
+                          <div className="flex flex-1 flex-col">
+                            <h3 className="font-medium">{item.title}</h3>
+                            <p className="text-sm text-gray-500">
+                              {item.dimensions}
+                            </p>
+                            <div className="mt-2 flex items-center gap-2">
+                              <button
+                                onClick={() =>
+                                  updateQuantity(item.id, item.quantity - 1)
+                                }
+                                className="rounded-full bg-gray-100 px-3 py-1 hover:bg-gray-200"
+                              >
+                                -
+                              </button>
+                              <span>{item.quantity}</span>
+                              <button
+                                onClick={() =>
+                                  updateQuantity(item.id, item.quantity + 1)
+                                }
+                                className="rounded-full bg-gray-100 px-3 py-1 hover:bg-gray-200"
+                              >
+                                +
+                              </button>
+                            </div>
+                          </div>
+                          {/* ✅ Trash icon with extra padding */}
+                          <button
+                            onClick={() => removeItem(item.id)}
+                            className="text-gray-500 hover:text-red-500 transition pr-4" // ✅ Added extra right padding
+                          >
+                            <Trash className="h-5 w-5" />
+                          </button>
+                        </motion.div>
+                      ))}
+                    </AnimatePresence>
+                  </div>
+                )}
+              </AnimatePresence>
             </div>
-
             {/* ✅ Full-width bottom border to close off the wishlist visually */}
             <div className="border-t w-full" />
           </motion.div>

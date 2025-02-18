@@ -33,7 +33,7 @@ export function Header() {
                   transition={{ duration: 0.3 }}
                   className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-black text-[10px] text-white"
                 >
-                  {items.length}
+                  {items.reduce((total, item) => total + item.quantity, 0)}
                 </motion.div>
               )}
             </div>

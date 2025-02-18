@@ -52,11 +52,19 @@ export const useWishlist = create<WishlistState>()(
           };
         }),
       updateQuantity: (id, quantity) =>
-        set((state) => ({
-          items: state.items.map((item) =>
-            item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item
-          )
-        })),
+        set((state) => {
+          if (quantity <= 0) {
+            // ✅ If quantity reaches 0, remove item
+            return {
+              items: state.items.filter((item) => item.id !== id)
+            };
+          }
+          return {
+            items: state.items.map((item) =>
+              item.id === id ? { ...item, quantity } : item
+            )
+          };
+        }),
       removeItem: (id) =>
         set((state) => ({
           items: state.items.filter((item) => item.id !== id)
