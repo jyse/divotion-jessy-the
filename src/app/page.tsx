@@ -1,7 +1,7 @@
 "use client";
 
 import { Header } from "@/components/Header";
-import { ProductGrid } from "@/components/ProductGrid";
+import { ProductGallery } from "@/components/ProductGallery";
 import { WishlistPanel } from "@/components/WishlistPanel";
 
 export default function Home() {
@@ -9,7 +9,7 @@ export default function Home() {
     <main className="min-h-screen">
       <Header />
       <div className="py-8">
-        <ProductGrid />
+        <ProductGallery />
       </div>
       <WishlistPanel />
     </main>
