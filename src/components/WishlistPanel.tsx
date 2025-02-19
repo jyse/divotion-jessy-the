@@ -14,12 +14,11 @@ export function WishlistPanel() {
     totalWishlistItems
   } = useWishlist();
 
-  // ✅ Memoize the mapped WishlistItem components
   const renderedWishlistItems = useMemo(() => {
     return wishlistItems.map((item) => (
       <WishlistItem key={item.id} id={item.id} />
     ));
-  }, [wishlistItems]); // Only re-calculate when wishlistItems changes
+  }, [wishlistItems]);
 
   return (
     <AnimatePresence>
@@ -44,7 +43,6 @@ export function WishlistPanel() {
             className="absolute right-4 top-4 bottom-4 w-[92%] max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl bg-white shadow-lg rounded-xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header Section */}
             <div className="flex items-center justify-between border-b p-4">
               <button
                 onClick={clearWishlist}
@@ -68,7 +66,6 @@ export function WishlistPanel() {
               </button>
             </div>
 
-            {/* Wishlist Items Section */}
             <div className="h-full overflow-y-auto p-4">
               <AnimatePresence mode="wait">
                 {wishlistItems.length === 0 ? (

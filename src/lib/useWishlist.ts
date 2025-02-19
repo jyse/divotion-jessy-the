@@ -20,11 +20,13 @@ interface WishlistState {
   clearWishlist: () => void;
 }
 
-// ✅ Helper: Calculate total
+// Memoized helper functions
 const calculateTotal = (items: WishlistItem[]) =>
   items.reduce((total, item) => total + item.quantity, 0);
 
-// ✅ Zustand Store
+const findItemIndex = (items: WishlistItem[], id: string) =>
+  items.findIndex((item) => item.id === id);
+
 export const useWishlist = create<WishlistState>()(
   persist(
     (set) => ({
@@ -39,89 +41,52 @@ export const useWishlist = create<WishlistState>()(
 
       toggleItem: (product) =>
         set((state) => {
-          const itemInWishlist = state.wishlistItems.some(
-            (item) => item.id === product.id
-          );
-          let updatedWishlist;
-          if (itemInWishlist) {
-            updatedWishlist = state.wishlistItems.filter(
-              (item) => item.id !== product.id
-            );
-          } else {
-            updatedWishlist = [
-              ...state.wishlistItems,
-              { ...product, quantity: 1 }
-            ];
-          }
+          const itemIndex = findItemIndex(state.wishlistItems, product.id);
+          const updatedWishlist =
+            itemIndex === -1
+              ? [...state.wishlistItems, { ...product, quantity: 1 }]
+              : [
+                  ...state.wishlistItems.slice(0, itemIndex),
+                  ...state.wishlistItems.slice(itemIndex + 1)
+                ];
+
+          return {
+            wishlistItems: updatedWishlist,
+            totalWishlistItems: calculateTotal(updatedWishlist)
+          };
+        }),
+      updateQuantity: (id, quantity) =>
+        set((state) => {
+          const itemIndex = findItemIndex(state.wishlistItems, id);
+
+          // Early return if item not found or quantity unchanged
+          if (itemIndex === -1) return state;
+          if (state.wishlistItems[itemIndex].quantity === quantity)
+            return state;
+
+          // Create new array with updated item
+          const updatedWishlist = [...state.wishlistItems];
+          updatedWishlist[itemIndex] = {
+            ...updatedWishlist[itemIndex],
+            quantity: Math.max(1, quantity)
+          };
+
           return {
             wishlistItems: updatedWishlist,
             totalWishlistItems: calculateTotal(updatedWishlist)
           };
         }),
 
-      // updateQuantity: (id, quantity) =>
-      // set((state) => {
-      //   const updatedWishlist = state.wishlistItems.map((item) =>
-      //     item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item
-      //   );
-      //   return {
-      //     wishlistItems: updatedWishlist,
-      //     totalWishlistItems: calculateTotal(updatedWishlist)
-      //   };
-      // }),
-      // set((state) => {
-      //   const index = state.wishlistItems.findIndex((item) => item.id === id);
-      //   if (index === -1) return state;
-
-      //   const updatedWishlist = [...state.wishlistItems];
-      //   updatedWishlist[index] = {
-      //     ...updatedWishlist[index],
-      //     quantity: Math.max(1, quantity)
-      //   };
-
-      //   return {
-      //     wishlistItems: updatedWishlist,
-      //     totalWishlistItems: calculateTotal(updatedWishlist)
-      //   };
-      // }),
-
-      // updateQuantity: (id, quantity) =>
-      //   set((state) => {
-      //     return {
-      //       wishlistItems: state.wishlistItems.map(
-      //         (item) =>
-      //           item.id === id && item.quantity !== quantity
-      //             ? { ...item, quantity: Math.max(1, quantity) } // Only replace when quantity actually changes
-      //             : item // Keep the same reference otherwise
-      //       ),
-      //       totalWishlistItems: calculateTotal(state.wishlistItems) // This will not trigger a change if the total count is the same
-      //     };
-      //   }),
-
-      updateQuantity: (id, quantity) =>
-        set((state) => {
-          const itemIndex = state.wishlistItems.findIndex(
-            (item) => item.id === id
-          );
-          if (itemIndex === -1) return state; // ✅ No change if item not found
-
-          const newWishlistItems = state.wishlistItems.map((item, index) =>
-            index === itemIndex
-              ? { ...item, quantity: Math.max(1, quantity) }
-              : item
-          );
-
-          return {
-            wishlistItems: newWishlistItems,
-            totalWishlistItems: calculateTotal(newWishlistItems)
-          };
-        }),
-
       removeItem: (id) =>
         set((state) => {
-          const updatedWishlist = state.wishlistItems.filter(
-            (item) => item.id !== id
-          );
+          const itemIndex = findItemIndex(state.wishlistItems, id);
+          if (itemIndex === -1) return state;
+
+          const updatedWishlist = [
+            ...state.wishlistItems.slice(0, itemIndex),
+            ...state.wishlistItems.slice(itemIndex + 1)
+          ];
+
           return {
             wishlistItems: updatedWishlist,
             totalWishlistItems: calculateTotal(updatedWishlist)
@@ -131,16 +96,23 @@ export const useWishlist = create<WishlistState>()(
       clearWishlist: () =>
         set({
           wishlistItems: [],
-          totalWishlistItems: 0
+          totalWishlistItems: 0,
+          isWishlistOpen: false
         })
     }),
     {
-      name: "wishlist-storage"
+      // Storage configuration
+      name: "wishlist-storage", // The key in localStorage
+
+      // Only store these specific pieces of state
+      partialize: (state) => ({
+        wishlistItems: state.wishlistItems,
+        totalWishlistItems: state.totalWishlistItems
+      })
     }
   )
 );
-
-// ✅ Optimized Zustand Selectors
+// Optimized selectors with memoization
 export const useWishlistItem = (id: string) =>
   useWishlist((state) => state.wishlistItems.find((item) => item.id === id));
 
@@ -152,8 +124,11 @@ export const useWishlistOpen = () =>
 
 export const useWishlistActions = () =>
   useWishlist(
-    useShallow((state: WishlistState) => ({
+    useShallow((state) => ({
       updateQuantity: state.updateQuantity,
       removeItem: state.removeItem
     }))
   );
+
+// Add export for type
+export type { WishlistItem };
