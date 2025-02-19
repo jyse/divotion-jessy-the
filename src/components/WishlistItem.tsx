@@ -26,6 +26,7 @@ export const WishlistItem = memo(
       updateQuantity(id, item.quantity + 1);
     }, [item, id, updateQuantity]);
 
+    // Removes entire product of wishlist
     const handleRemove = useCallback(() => {
       if (!item) return;
       removeItem(id);

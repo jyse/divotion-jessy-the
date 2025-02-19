@@ -40,7 +40,10 @@ export const useWishlist = create<WishlistState>()(
 
       toggleItem: (product) =>
         set((state) => {
+          // Find the product in the wishlist
           const itemIndex = findItemIndex(state.wishlistItems, product.id);
+          // If product not found (-1), add it with quantity: 1
+          // If product found, remove by .slice()
           const updatedWishlist =
             itemIndex === -1
               ? [...state.wishlistItems, { ...product, quantity: 1 }]
@@ -54,11 +57,16 @@ export const useWishlist = create<WishlistState>()(
             totalWishlistItems: calculateTotal(updatedWishlist)
           };
         }),
+
       updateQuantity: (id, quantity) =>
         set((state) => {
+          // Find product in wishlist
           const itemIndex = findItemIndex(state.wishlistItems, id);
 
+          // If product doesn't exist, return current state
           if (itemIndex === -1) return state;
+
+          // if new quantity same as old -> no update needed
           if (state.wishlistItems[itemIndex].quantity === quantity)
             return state;
 
@@ -77,6 +85,7 @@ export const useWishlist = create<WishlistState>()(
       removeItem: (id) =>
         set((state) => {
           const itemIndex = findItemIndex(state.wishlistItems, id);
+
           if (itemIndex === -1) return state;
 
           const updatedWishlist = [
