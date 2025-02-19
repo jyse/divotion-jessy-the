@@ -20,7 +20,6 @@ interface WishlistState {
   clearWishlist: () => void;
 }
 
-// Memoized helper functions
 const calculateTotal = (items: WishlistItem[]) =>
   items.reduce((total, item) => total + item.quantity, 0);
 
@@ -59,12 +58,10 @@ export const useWishlist = create<WishlistState>()(
         set((state) => {
           const itemIndex = findItemIndex(state.wishlistItems, id);
 
-          // Early return if item not found or quantity unchanged
           if (itemIndex === -1) return state;
           if (state.wishlistItems[itemIndex].quantity === quantity)
             return state;
 
-          // Create new array with updated item
           const updatedWishlist = [...state.wishlistItems];
           updatedWishlist[itemIndex] = {
             ...updatedWishlist[itemIndex],
@@ -101,10 +98,7 @@ export const useWishlist = create<WishlistState>()(
         })
     }),
     {
-      // Storage configuration
-      name: "wishlist-storage", // The key in localStorage
-
-      // Only store these specific pieces of state
+      name: "wishlist-storage",
       partialize: (state) => ({
         wishlistItems: state.wishlistItems,
         totalWishlistItems: state.totalWishlistItems
@@ -112,7 +106,6 @@ export const useWishlist = create<WishlistState>()(
     }
   )
 );
-// Optimized selectors with memoization
 export const useWishlistItem = (id: string) =>
   useWishlist((state) => state.wishlistItems.find((item) => item.id === id));
 
@@ -130,5 +123,4 @@ export const useWishlistActions = () =>
     }))
   );
 
-// Add export for type
 export type { WishlistItem };

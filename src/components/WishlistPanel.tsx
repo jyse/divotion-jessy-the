@@ -87,7 +87,7 @@ export function WishlistPanel() {
                 ) : (
                   <div className="flex flex-col gap-y-4">
                     {renderedWishlistItems}
-                  </div> // ✅ Uses memoized items
+                  </div>
                 )}
               </AnimatePresence>
             </div>
