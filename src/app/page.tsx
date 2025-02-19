@@ -1,5 +1,4 @@
 "use client";
-
 import { Header } from "@/components/Header";
 import { ProductGallery } from "@/components/ProductGallery";
 import { WishlistPanel } from "@/components/WishlistPanel";

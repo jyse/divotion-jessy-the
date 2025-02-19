@@ -1,5 +1,4 @@
 "use client";
-
 import { useCallback } from "react";
 import { Heart } from "lucide-react";
 import Image from "next/image";
@@ -45,6 +44,7 @@ export function Card({ id, title, image }: CardProps) {
           src={image || fallbackImage}
           alt={title}
           fill
+          priority
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover object-center"
         />

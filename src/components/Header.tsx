@@ -1,5 +1,4 @@
 "use client";
-
 import { Heart } from "lucide-react";
 import { motion } from "framer-motion";
 import { useWishlist } from "@/lib/useWishlist";
