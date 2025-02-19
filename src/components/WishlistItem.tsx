@@ -12,7 +12,6 @@ export const WishlistItem = memo(
     const item = useWishlistItem(id);
     const { updateQuantity, removeItem } = useWishlistActions();
 
-    // Move the handlers outside the early return
     const handleDecrease = useCallback(() => {
       if (!item) return;
       if (item.quantity > 1) {
@@ -32,7 +31,6 @@ export const WishlistItem = memo(
       removeItem(id);
     }, [item, id, removeItem]);
 
-    // Render nothing if no item, but after hook declarations
     if (!item) return null;
 
     return (
@@ -41,7 +39,6 @@ export const WishlistItem = memo(
         role="listitem"
         aria-label={`Wishlist item: ${item.title}`}
       >
-        {/* Image Container */}
         <div className="relative h-24 w-24 flex-shrink-0 mx-auto sm:mx-0">
           <Image
             src={item.image}
@@ -53,13 +50,11 @@ export const WishlistItem = memo(
           />
         </div>
 
-        {/* Product Info */}
         <div className="flex flex-1 flex-col items-center sm:items-start">
           <h3 className="text-sm sm:text-base text-center sm:text-left font-medium">
             {item.title}
           </h3>
 
-          {/* Quantity Controls */}
           <div className="mt-2 flex items-center gap-2">
             <button
               onClick={handleDecrease}
@@ -80,7 +75,6 @@ export const WishlistItem = memo(
           </div>
         </div>
 
-        {/* Remove Button */}
         <button
           onClick={handleRemove}
           data-testid="remove-from-wishlist"
