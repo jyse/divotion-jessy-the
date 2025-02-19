@@ -38,7 +38,6 @@ export function Card(props: CardProps) {
 
   return (
     <div className="group relative transition-all duration-300 transform scale-100 hover:scale-[1.02] hover:shadow-2xl shadow-md rounded-lg bg-white p-4">
-      {/* Image & Wishlist Button */}
       <div className="relative aspect-square overflow-hidden rounded-lg">
         <Image
           src={props.image}
@@ -50,23 +49,27 @@ export function Card(props: CardProps) {
         <button
           onClick={handleWishlistToggle}
           className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md transition-transform hover:scale-110"
+          aria-label={
+            isInWishlist
+              ? `Remove ${props.title} from wishlist`
+              : `Add ${props.title} to wishlist`
+          }
         >
           <Heart
             className={`h-5 w-5 ${
               isInWishlist ? "fill-red-500 text-red-500" : "text-gray-600"
             }`}
+            aria-hidden="true"
           />
         </button>
       </div>
-
-      {/* Card Info */}
+      <div aria-live="assertive" className="sr-only">
+        {isInWishlist
+          ? `${props.title} removed from wishlist`
+          : `${props.title} added to wishlist`}
+      </div>
       <div className="mt-3 px-2 pb-2">
         <h3 className="text-sm font-medium text-gray-900">{props.title}</h3>
-        {/* Uncomment below if you want price & dimensions */}
-        {/* <div className="flex justify-between text-sm text-gray-500">
-          <span className="text-lg font-medium text-gray-900">€{props.price.toFixed(2)}</span>
-          <span>{props.dimensions}</span>
-        </div> */}
       </div>
     </div>
   );
