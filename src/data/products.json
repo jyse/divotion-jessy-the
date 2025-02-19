@@ -2,253 +2,181 @@
   {
     "id": "1",
     "title": "ArtIstry Art Piece #1",
-    "image": "/images/1.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/1.png"
   },
   {
     "id": "2",
     "title": "ArtIstry Art Piece #2",
-    "image": "/images/2.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/2.png"
   },
   {
     "id": "3",
     "title": "ArtIstry Art Piece #3",
-    "image": "/images/3.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/3.png"
   },
   {
     "id": "4",
     "title": "ArtIstry Art Piece #4",
-    "image": "/images/4.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/4.png"
   },
   {
     "id": "5",
     "title": "ArtIstry Art Piece #5",
-    "image": "/images/5.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/5.png"
   },
   {
     "id": "6",
     "title": "ArtIstry Art Piece #6",
-    "image": "/images/6.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/6.png"
   },
   {
     "id": "7",
     "title": "ArtIstry Art Piece #7",
-    "image": "/images/7.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/7.png"
   },
   {
     "id": "8",
     "title": "ArtIstry Art Piece #8",
-    "image": "/images/8.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/8.png"
   },
   {
     "id": "9",
     "title": "ArtIstry Art Piece #9",
-    "image": "/images/9.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/9.png"
   },
   {
     "id": "10",
     "title": "ArtIstry Art Piece #10",
-    "image": "/images/10.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/10.png"
   },
   {
     "id": "11",
     "title": "ArtIstry Art Piece #11",
-    "image": "/images/11.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/11.png"
   },
   {
     "id": "12",
     "title": "ArtIstry Art Piece #12",
-    "image": "/images/12.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/12.png"
   },
   {
     "id": "13",
     "title": "ArtIstry Art Piece #13",
-    "image": "/images/13.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/13.png"
   },
   {
     "id": "14",
     "title": "ArtIstry Art Piece #14",
-    "image": "/images/14.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/14.png"
   },
   {
     "id": "15",
     "title": "ArtIstry Art Piece #15",
-    "image": "/images/15.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/15.png"
   },
   {
     "id": "16",
     "title": "ArtIstry Art Piece #16",
-    "image": "/images/16.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/16.png"
   },
   {
     "id": "17",
     "title": "ArtIstry Art Piece #17",
-    "image": "/images/17.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/17.png"
   },
   {
     "id": "18",
     "title": "ArtIstry Art Piece #18",
-    "image": "/images/18.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/18.png"
   },
   {
     "id": "19",
     "title": "ArtIstry Art Piece #19",
-    "image": "/images/19.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/19.png"
   },
   {
     "id": "20",
     "title": "ArtIstry Art Piece #20",
-    "image": "/images/20.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/20.png"
   },
   {
     "id": "21",
     "title": "ArtIstry Art Piece #21",
-    "image": "/images/21.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/21.png"
   },
   {
     "id": "22",
     "title": "ArtIstry Art Piece #22",
-    "image": "/images/22.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/22.png"
   },
   {
     "id": "23",
     "title": "ArtIstry Art Piece #23",
-    "image": "/images/23.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/23.png"
   },
   {
     "id": "24",
     "title": "ArtIstry Art Piece #24",
-    "image": "/images/24.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/24.png"
   },
   {
     "id": "25",
     "title": "ArtIstry Art Piece #25",
-    "image": "/images/25.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/25.png"
   },
   {
     "id": "26",
     "title": "ArtIstry Art Piece #26",
-    "image": "/images/26.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/26.png"
   },
   {
     "id": "27",
     "title": "ArtIstry Art Piece #27",
-    "image": "/images/27.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/27.png"
   },
   {
     "id": "28",
     "title": "ArtIstry Art Piece #28",
-    "image": "/images/28.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/28.png"
   },
   {
     "id": "29",
     "title": "ArtIstry Art Piece #29",
-    "image": "/images/29.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/29.png"
   },
   {
     "id": "30",
     "title": "ArtIstry Art Piece #30",
-    "image": "/images/30.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/30.png"
   },
   {
     "id": "31",
     "title": "ArtIstry Art Piece #31",
-    "image": "/images/31.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/31.png"
   },
   {
     "id": "32",
     "title": "ArtIstry Art Piece #32",
-    "image": "/images/32.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/32.png"
   },
   {
     "id": "33",
     "title": "ArtIstry Art Piece #33",
-    "image": "/images/33.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/33.png"
   },
   {
     "id": "34",
     "title": "ArtIstry Art Piece #34",
-    "image": "/images/34.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/34.png"
   },
   {
     "id": "35",
     "title": "ArtIstry Art Piece #35",
-    "image": "/images/35.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/35.png"
   },
   {
     "id": "36",
     "title": "ArtIstry Art Piece #36",
-    "image": "/images/36.png",
-    "price": 59.99,
-    "dimensions": "24x36 inches"
+    "image": "/images/36.png"
   }
 ]

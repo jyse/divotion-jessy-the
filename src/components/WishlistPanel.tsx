@@ -1,8 +1,7 @@
 "use client";
-
 import { X, Trash } from "lucide-react";
 import Image from "next/image";
-import { useWishlist } from "@/store/useWishlist";
+import { useWishlist } from "@/lib/useWishlist";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function WishlistPanel() {
@@ -66,7 +65,6 @@ export function WishlistPanel() {
             <div className="h-full overflow-y-auto p-4">
               <AnimatePresence mode="wait">
                 {wishlistItems.length === 0 ? (
-                  // ✅ Smooth empty state transition
                   <motion.p
                     key="empty-message"
                     initial={{ opacity: 0, scale: 0.9 }}
@@ -90,7 +88,7 @@ export function WishlistPanel() {
                           transition={{ duration: 0.3 }}
                           className="flex gap-4 border-b pb-4 last:border-none"
                         >
-                          {/* 🔹 Image Section (Centered on Mobile) */}
+                          {/* 🔹 Image Section */}
                           <div className="relative h-24 w-24 flex-shrink-0 mx-auto sm:mx-0">
                             <Image
                               src={item.image}
@@ -105,11 +103,7 @@ export function WishlistPanel() {
                             <h3 className="text-center sm:text-left font-medium">
                               {item.title}
                             </h3>
-                            <p className="text-center sm:text-left text-sm text-gray-500">
-                              {item.dimensions}
-                            </p>
-
-                            {/* 🔹 Quantity Controls */}
+                            {/* 🔹 Quantity */}
                             <div className="mt-2 flex items-center gap-2">
                               <button
                                 onClick={() =>

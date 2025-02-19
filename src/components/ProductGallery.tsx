@@ -1,14 +1,11 @@
 "use client";
-
 import { useEffect, useState } from "react";
-import { Card } from "./Card"; // ✅ Keeping the Card component named clearly
+import { Card } from "./Card";
 
 interface Product {
   id: string;
   title: string;
   image: string;
-  price: number;
-  dimensions: string;
 }
 
 export function ProductGallery() {
@@ -42,8 +39,6 @@ export function ProductGallery() {
               id={product.id}
               title={product.title}
               image={product.image}
-              price={product.price}
-              dimensions={product.dimensions}
             />
           ))
         ) : (

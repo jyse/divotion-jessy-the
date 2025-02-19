@@ -5,8 +5,6 @@ interface WishlistItem {
   id: string;
   title: string;
   image: string;
-  price: number;
-  dimensions: string;
   quantity: number;
 }
 

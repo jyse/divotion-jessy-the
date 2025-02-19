@@ -2,7 +2,7 @@
 
 import { Heart } from "lucide-react";
 import { motion } from "framer-motion";
-import { useWishlist } from "@/store/useWishlist";
+import { useWishlist } from "@/lib/useWishlist";
 
 export function Header() {
   const { totalWishlistItems, toggleWishlistPanel } = useWishlist();
@@ -11,12 +11,9 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-white">
       <div className="container mx-auto px-4 h-16 lg:px-6">
         <div className="flex h-full items-center justify-between">
-          {/* ✅ Improved Font for Better UI Hierarchy */}
           <div className="font-geist-sans text-xl font-semibold">
             ArtIstry Collective
           </div>
-
-          {/* Favorites Button */}
           <button
             onClick={toggleWishlistPanel}
             className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100"
@@ -25,8 +22,6 @@ export function Header() {
             <span>Favorites</span>
             <div className="relative">
               <Heart className="h-5 w-5" />
-
-              {/* ✅ Optimized Animation + Prevent Flashing */}
               {totalWishlistItems > 0 && (
                 <motion.div
                   key={totalWishlistItems}
