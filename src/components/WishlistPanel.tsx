@@ -1,5 +1,5 @@
 "use client";
-// 🐲Still add comments in here and re-factoring
+
 import { X, Trash } from "lucide-react";
 import Image from "next/image";
 import { useWishlist } from "@/store/useWishlist";
@@ -9,10 +9,11 @@ export function WishlistPanel() {
   const {
     isWishlistOpen,
     toggleWishlistPanel,
-    items,
+    wishlistItems,
     updateQuantity,
     removeItem,
-    clearWishlist
+    clearWishlist,
+    totalWishlistItems
   } = useWishlist();
 
   return (
@@ -26,6 +27,7 @@ export function WishlistPanel() {
           className="fixed inset-0 z-50 bg-black bg-opacity-50"
           onClick={toggleWishlistPanel}
         >
+          {/* 🛠️ Wishlist Panel Container */}
           <motion.div
             role="dialog"
             aria-labelledby="wishlist-title"
@@ -35,10 +37,10 @@ export function WishlistPanel() {
             animate={{ x: "0%" }}
             exit={{ x: "100%" }}
             transition={{ type: "tween", duration: 0.3 }}
-            className="absolute right-4 top-4 bottom-4 h-[calc(100%-2rem)] w-full max-w-md bg-white shadow-lg rounded-xl overflow-hidden" // ✅ Added `right-4 top-4 bottom-4` and `h-[calc(100%-2rem)]`
+            className="absolute right-4 top-4 bottom-4 w-[92%] max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl bg-white shadow-lg rounded-xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header */}
+            {/* 🔹 Header Section */}
             <div className="flex items-center justify-between border-b p-4">
               <button
                 onClick={clearWishlist}
@@ -47,13 +49,8 @@ export function WishlistPanel() {
               >
                 Clear All
               </button>
-              <h2 className="text-lg font-medium">
-                Wishlist {/* Note🐲 TotalWisthlist variable here*/}
-                {items.length > 0 &&
-                  `(${items.reduce(
-                    (total, item) => total + item.quantity,
-                    0
-                  )})`}
+              <h2 id="wishlist-title" className="text-lg font-medium">
+                Wishlist {totalWishlistItems > 0 && `(${totalWishlistItems})`}
               </h2>
 
               <button
@@ -65,10 +62,11 @@ export function WishlistPanel() {
               </button>
             </div>
 
-            {/* Items */}
+            {/* 🔹 Wishlist Items Section */}
             <div className="h-full overflow-y-auto p-4">
               <AnimatePresence mode="wait">
-                {items.length === 0 ? (
+                {wishlistItems.length === 0 ? (
+                  // ✅ Smooth empty state transition
                   <motion.p
                     key="empty-message"
                     initial={{ opacity: 0, scale: 0.9 }}
@@ -83,16 +81,17 @@ export function WishlistPanel() {
                 ) : (
                   <div className="space-y-4">
                     <AnimatePresence>
-                      {items.map((item) => (
+                      {wishlistItems.map((item) => (
                         <motion.div
                           key={item.id}
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, x: 100 }} // ✅ Smooth removal animation
+                          exit={{ opacity: 0, x: 100 }}
                           transition={{ duration: 0.3 }}
-                          className="flex gap-4 border-b pb-4 last:border-none" // ✅ Last item has no border
+                          className="flex gap-4 border-b pb-4 last:border-none"
                         >
-                          <div className="relative h-24 w-24 flex-shrink-0">
+                          {/* 🔹 Image Section (Centered on Mobile) */}
+                          <div className="relative h-24 w-24 flex-shrink-0 mx-auto sm:mx-0">
                             <Image
                               src={item.image}
                               alt={item.title}
@@ -100,11 +99,17 @@ export function WishlistPanel() {
                               className="rounded-lg object-cover"
                             />
                           </div>
-                          <div className="flex flex-1 flex-col">
-                            <h3 className="font-medium">{item.title}</h3>
-                            <p className="text-sm text-gray-500">
+
+                          {/* 🔹 Product Info */}
+                          <div className="flex flex-1 flex-col items-center sm:items-start">
+                            <h3 className="text-center sm:text-left font-medium">
+                              {item.title}
+                            </h3>
+                            <p className="text-center sm:text-left text-sm text-gray-500">
                               {item.dimensions}
                             </p>
+
+                            {/* 🔹 Quantity Controls */}
                             <div className="mt-2 flex items-center gap-2">
                               <button
                                 onClick={() =>
@@ -127,7 +132,8 @@ export function WishlistPanel() {
                               </button>
                             </div>
                           </div>
-                          {/* ✅ Trash icon with extra padding */}
+
+                          {/* 🔹 Remove Button */}
                           <button
                             onClick={() => removeItem(item.id)}
                             className="text-gray-500 hover:text-red-500 transition pr-4"

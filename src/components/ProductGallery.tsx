@@ -14,7 +14,6 @@ interface Product {
 export function ProductGallery() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  console.log(products, "WHERE ARE THE PRODUCTS? 🔥");
 
   useEffect(() => {
     fetch("/api/products")
@@ -35,7 +34,7 @@ export function ProductGallery() {
 
   return (
     <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.length > 0 ? (
           products.map((product) => (
             <Card

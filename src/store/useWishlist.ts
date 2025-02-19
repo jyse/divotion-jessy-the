@@ -11,7 +11,8 @@ interface WishlistItem {
 }
 
 interface WishlistState {
-  items: WishlistItem[];
+  wishlistItems: WishlistItem[]; // ✅ Renamed from `items` for clarity
+  totalWishlistItems: number; // ✅ Stored in Zustand for better performance
   isWishlistOpen: boolean;
   toggleWishlistPanel: () => void;
   toggleItem: (product: Omit<WishlistItem, "quantity">) => void;
@@ -23,55 +24,76 @@ interface WishlistState {
 export const useWishlist = create<WishlistState>()(
   persist(
     (set) => ({
-      items: [],
+      wishlistItems: [],
+      totalWishlistItems: 0, // ✅ Tracks total number of all wishlist items
       isWishlistOpen: false,
+
       toggleWishlistPanel: () =>
         set((state) => ({
           isWishlistOpen: !state.isWishlistOpen
         })),
+
       toggleItem: (product) =>
         set((state) => {
-          const exists = state.items.some((item) => item.id === product.id);
+          const exists = state.wishlistItems.some(
+            (item) => item.id === product.id
+          );
+
+          let updatedWishlist;
           if (exists) {
-            return {
-              items: state.items.filter((item) => item.id !== product.id)
-            };
+            updatedWishlist = state.wishlistItems.filter(
+              (item) => item.id !== product.id
+            );
+          } else {
+            updatedWishlist = [
+              ...state.wishlistItems,
+              { ...product, quantity: 1 }
+            ];
           }
+
           return {
-            items: [
-              ...state.items,
-              {
-                id: product.id,
-                title: product.title,
-                image: product.image,
-                price: product.price,
-                dimensions: product.dimensions,
-                quantity: 1 // ✅ Make sure quantity starts at 1
-              }
-            ]
-          };
-        }),
-      updateQuantity: (id, quantity) =>
-        set((state) => {
-          if (quantity <= 0) {
-            // ✅ If quantity reaches 0, remove item
-            return {
-              items: state.items.filter((item) => item.id !== id)
-            };
-          }
-          return {
-            items: state.items.map((item) =>
-              item.id === id ? { ...item, quantity } : item
+            wishlistItems: updatedWishlist,
+            totalWishlistItems: updatedWishlist.reduce(
+              (total, item) => total + item.quantity,
+              0
             )
           };
         }),
+
+      updateQuantity: (id, quantity) =>
+        set((state) => {
+          const updatedWishlist = state.wishlistItems.map((item) =>
+            item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item
+          );
+
+          return {
+            wishlistItems: updatedWishlist,
+            totalWishlistItems: updatedWishlist.reduce(
+              (total, item) => total + item.quantity,
+              0
+            )
+          };
+        }),
+
       removeItem: (id) =>
-        set((state) => ({
-          items: state.items.filter((item) => item.id !== id)
-        })),
+        set((state) => {
+          const updatedWishlist = state.wishlistItems.filter(
+            (item) => item.id !== id
+          );
+
+          return {
+            wishlistItems: updatedWishlist,
+            totalWishlistItems: updatedWishlist.reduce(
+              (total, item) => total + item.quantity,
+              0
+            )
+          };
+        }),
+
       clearWishlist: () =>
         set(() => ({
-          items: []
+          wishlistItems: [],
+          totalWishlistItems: 0
         }))
     }),
     {
