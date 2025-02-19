@@ -32,7 +32,9 @@ export function Header() {
                   className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-black text-[10px] text-white"
                   aria-live="polite"
                 >
-                  {totalWishlistItems}
+                  <span data-testid="wishlist-counter">
+                    {totalWishlistItems}
+                  </span>
                 </motion.div>
               )}
             </div>

@@ -50,6 +50,7 @@ export function Card({ id, title, image }: CardProps) {
         />
         <button
           onClick={handleWishlistToggle}
+          data-testid={isFavorited ? "remove-from-wishlist" : "add-to-wishlist"}
           className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md transition-transform hover:scale-110"
           aria-label={
             isFavorited

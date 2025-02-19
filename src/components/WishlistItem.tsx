@@ -63,6 +63,7 @@ export const WishlistItem = memo(
           <div className="mt-2 flex items-center gap-2">
             <button
               onClick={handleDecrease}
+              data-testid="decrease-quantity"
               className="rounded-full bg-gray-100 px-3 py-1 hover:bg-gray-200 active:bg-gray-300 transition-colors"
               aria-label={`Decrease quantity of ${item.title}`}
             >
@@ -82,6 +83,7 @@ export const WishlistItem = memo(
         {/* Remove Button */}
         <button
           onClick={handleRemove}
+          data-testid="remove-from-wishlist"
           className="text-gray-500 hover:text-red-500 transition-colors p-2 hover:bg-gray-100 rounded-full"
           aria-label={`Remove ${item.title} from wishlist`}
         >

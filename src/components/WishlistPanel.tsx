@@ -46,6 +46,7 @@ export function WishlistPanel() {
             <div className="flex items-center justify-between border-b p-4">
               <button
                 onClick={clearWishlist}
+                data-testid="clear-wishlist"
                 className="text-sm text-gray-500 hover:text-red-500 transition"
                 aria-label="Clear all wishlist items"
               >
@@ -55,7 +56,10 @@ export function WishlistPanel() {
                 id="wishlist-title"
                 className="text-base sm:text-lg font-medium"
               >
-                Wishlist {totalWishlistItems > 0 && `(${totalWishlistItems})`}
+                <span data-testid="wishlist-counter">
+                  Wishlist{" "}
+                  {totalWishlistItems > 0 ? `(${totalWishlistItems})` : ""}
+                </span>
               </h2>
               <button
                 onClick={toggleWishlistPanel}
