@@ -14,8 +14,8 @@ interface CardProps {
 }
 
 export function Card(props: CardProps) {
-  const { items, toggleItem } = useWishlist();
-  const isInWishlist = items.some((item) => item.id === props.id);
+  const { wishlistItems, toggleItem } = useWishlist();
+  const isInWishlist = wishlistItems.some((item) => item.id === props.id);
 
   const handleWishlistToggle = () => {
     toggleItem(props);

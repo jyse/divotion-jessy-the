@@ -62,9 +62,13 @@ export const useWishlist = create<WishlistState>()(
 
       updateQuantity: (id, quantity) =>
         set((state) => {
-          const updatedWishlist = state.wishlistItems.map((item) =>
-            item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item
-          );
+          const updatedWishlist = state.wishlistItems
+            .map((item) =>
+              item.id === id
+                ? { ...item, quantity: Math.max(0, quantity) }
+                : item
+            )
+            .filter((item) => item.quantity > 0);
 
           return {
             wishlistItems: updatedWishlist,
